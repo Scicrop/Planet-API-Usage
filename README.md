@@ -1,8 +1,8 @@
 # 🌍📡 Planet API – Agronomic & Environmental Data Analysis Examples
 
-This repository contains **practical and functional Jupyter notebooks** demonstrating **how to access, query, and analyze Planet data** using **Python**, with a focus on **agronomic, environmental, and territorial monitoring applications**.
+This repository contains **hands-on, production-oriented Jupyter notebooks** demonstrating how to **access, process, and analyze Planet satellite data** using **Python**, with a strong focus on **agronomic intelligence, environmental monitoring, and geospatial analytics**.
 
-The examples provided here are **not generic tutorials**: they reflect **real-world use cases**, designed for professionals working with **geospatial analysis, remote sensing, data science, ESG, agriculture, and environmental monitoring**.
+These notebooks go beyond basic API usage. They reflect **real-world workflows**, including **data quality handling, spectral index computation, and time series analysis**, as commonly required in **precision agriculture, ESG projects, and environmental decision support systems**.
 
 ---
 
@@ -10,98 +10,144 @@ The examples provided here are **not generic tutorials**: they reflect **real-wo
 
 ### 🛰️ `api-planet-imagery.ipynb`
 
-Notebook focused on **traditional Planet imagery products**.
+Notebook focused on **PlanetScope multispectral imagery**, covering the **full analytical workflow** from data acquisition to vegetation index analysis.
 
-**Key topics covered:**
+#### 🔑 What this notebook demonstrates
+
+**Data access & ordering**
 
 * 🔐 Secure authentication with the Planet API
-* 🗺️ Definition of AOI (Area of Interest) using GeoJSON
+* 🗺️ AOI definition using GeoJSON (including AOIs derived from shapefiles)
 * 🔎 Image search by:
 
   * Temporal range
-  * Sensor / product type
-  * Spatial coverage
-* 📦 Creation of **Orders** for:
+  * Product type (`PSScene`)
+  * Asset type (`AnalyticMS_SR_8b`)
+* 📦 Order creation with:
 
   * AOI clipping
-  * Automated download
-* 📥 Organization and consumption of returned assets
+  * Surface Reflectance products
+  * Automated asset download
 
-**Practical applications:**
+**Understanding Planet imagery products**
 
-* Crop and field monitoring
-* Visual assessment of climate-related events
-* Land use and land cover analysis
-* Environmental and operational audits
+* 🧠 Clear interpretation of Planet file nomenclature:
+
+  * `AnalyticMS_SR_8b` → 8-band Surface Reflectance imagery
+  * `udm2` → pixel-level quality and usability mask
+* 🧪 Validation of band count and band semantics:
+
+  * Coastal Blue, Blue, Green, Yellow, Red, Red Edge, NIR
+
+**Data quality handling**
+
+* 🛡️ Proper use of **UDM2 masks** to:
+
+  * Remove clouds, shadows, invalid pixels
+  * Ensure agronomically reliable indices
+* ✅ Construction of a valid pixel mask for analysis
+
+**Spectral index processing**
+
+* 🌱 NDVI computation (Normalized Difference Vegetation Index)
+* 🌾 NDRE computation (Normalized Difference Red Edge Index)
+* 📐 Correct band selection and scaling
+* ✂️ Safe clipping of index values **only for visualization**
+
+**Visualization & analysis**
+
+* 🗺️ Agronomically appropriate color palettes:
+
+  * NDVI → brown → yellow → green
+  * NDRE → yellow → orange → dark green
+* 📊 Distribution analysis using:
+
+  * Histograms
+  * Kernel Density Estimation (KDE)
+* 📈 Interpretation of pixel distributions for crop vigor and stress analysis
+
+#### 🚜 Practical agronomic applications
+
+* Crop vigor mapping
+* Early detection of water or nitrogen stress
+* Field heterogeneity analysis
+* Support for variable-rate management
+* Pre-processing for machine learning models
 
 ---
 
 ### 🌱 `api-planet-planetary-variables.ipynb`
 
-Notebook dedicated to **Planetary Variables (L4)** — derived products ready for quantitative analysis.
+Notebook dedicated to **Planetary Variables (L4)** — **ready-to-use, derived products** optimized for **time series and large-scale analysis**.
 
-**Special focus on:**
+#### 🌍 Special focus on
 
 * 💧 **Soil Water Content (SWC)**
 * 🌡️ Land Surface Temperature (LST)
 * 🌾 Biomass Proxy
 
-**What this notebook demonstrates:**
+#### 📡 What this notebook demonstrates
 
-* 📡 Automatic discovery of products available to the organization
-* 🔍 Identification of enabled `resource_ids`
-* 🧾 Creation of **Subscriptions** (without physical delivery)
-* 📈 Consumption of **time series directly via the `/results` endpoint**
-* 📊 Extraction of statistics such as:
+* 🔍 Automatic discovery of **products available to the organization**
+* 🧾 Inspection of enabled `resource_ids`
+* 🧩 Understanding product families and quotas
+* 📑 Creation of **Subscriptions** (no raster delivery required)
+* 📈 Consumption of **time series via the `/results` endpoint**
+* 📊 Parsing of returned statistics:
 
-  * Spatial mean
+  * Mean values over AOI
   * Valid data percentage
-  * Solar and UTC timestamps
+  * Acquisition timestamps (UTC and solar time)
 
-**Why this matters:**
+#### 🚀 Why this approach matters
 
-* Eliminates the need to download raster files
-* Reduces computational and storage costs
-* Simplifies integration with data pipelines, BI tools, and analytical models
+* ❌ No need to download large raster files
+* 💸 Lower storage and processing costs
+* 🔄 Ideal for:
+
+  * Dashboards
+  * Data pipelines
+  * Monitoring systems
+  * ESG indicators
+  * Predictive analytics
 
 ---
 
-## 🚜🌎 Importance for Agronomic and Environmental Analysis
-
-These notebooks are particularly useful for:
+## 🚜🌎 Why This Repository Matters for Agronomy & Environment
 
 ### 🌾 Precision Agriculture
 
-* Monitoring **soil moisture dynamics**
-* Assessing water stress during critical periods
-* Supporting irrigation and crop management decisions
+* Monitoring **vegetation vigor and variability**
+* Detecting **water and nitrogen stress**
+* Supporting irrigation and fertilization decisions
+* Field-level temporal analysis
 
-### 🌦️ Climate and Environmental Monitoring
+### 🌦️ Environmental & Climate Monitoring
 
-* Detecting hydric and thermal stress
-* Supporting climate impact studies
-* Monitoring sensitive areas and environmental degradation
+* Tracking hydric and thermal stress
+* Supporting climate impact assessments
+* Monitoring sensitive or regulated areas
 
 ### 📊 Data Science & Analytics
 
-* Direct integration with Pandas, NumPy, and analytical pipelines
-* Use of geospatial data as **structured time series**
-* Solid foundation for predictive models and ESG indicators
+* Seamless integration with Pandas, NumPy, Rasterio, and Seaborn
+* Transformation of satellite data into **structured analytical datasets**
+* Solid base for ML models and decision-support systems
 
-### 🛰️ Modern Geoprocessing
+### 🛰️ Modern Geospatial Workflows
 
-* Practical use of GeoJSON
-* AOIs derived from shapefiles
-* API-first, cloud-native data consumption
+* GeoJSON-first design
+* Shapefile-to-AOI conversion
+* API-driven, cloud-native geoprocessing
 
 ---
 
 ## ⚠️ Important Notes
 
 * 🔑 Valid Planet API credentials are required
-* 📜 Product access depends on the organization’s contract
-* 📦 Some products require active quota
-* 📐 Very large AOIs may be subject to area limits
+* 📜 Product access depends on your organization’s contract
+* 📦 Some products consume quota
+* 📐 Very large AOIs may be subject to limits
 
 ---
 
@@ -109,8 +155,8 @@ These notebooks are particularly useful for:
 
 This repository is ideal for:
 
-* Agronomists with a data-driven focus
-* Environmental data scientists
+* Agronomists working with remote sensing
+* Environmental and climate data scientists
 * ESG and sustainability analysts
-* GIS / GeoAnalytics developers
+* GIS and GeoAnalytics developers
 * Researchers and consultants in agriculture and environmental domains
